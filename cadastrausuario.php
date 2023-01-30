@@ -5,16 +5,16 @@ $senha=$_POST['senha'];
 include("conectadb.php");
 
 //Verificar usuário existente
-$sql="SELECT COUNT usu_id FROM usuarios WHERE usu_nome =$nome AND usu_senha =$senha";
+$sql="SELECT COUNT(usu_id) FROM usuarios WHERE usu_nome ='$nome' AND usu_senha ='$senha'";
 $resultado=mysqli_query($link,$sql);
 while($tbl=mysqli_fetch_array($resultado)){
     $cont=$tbl[0];
 }
 if($cont==1){
-    echo"<script>window.alert('USUÁRIO OU SENHA INCORRETOS');</script>";
+    echo"<script>window.alert('USUARIO JÁ CADASTRADO!');</script>";
 }
 else{
-    $sql="INSERT INTO usuarios(usu_nome,usu_senha)VALUES($nome,$senha)";
+    $sql="INSERT INTO usuarios(usu_nome,usu_senha)VALUES('$nome','$senha')";
     mysqli_query($link,$sql);
     header("location:listausuarios.php");
 
@@ -32,7 +32,7 @@ else{
     
 </head>
 <body>
-    href="homesistema.html"><input type="button" id="menuhome" value="HOME SISTEMA">
+    <a href="homesistema.html"><input type="button" id="menuhome" value="HOME SISTEMA"></a>
     <div>
     <script> 
             function mostrarsenha(){
@@ -50,7 +50,7 @@ else{
             <input type="password" id="senha" name="senha" placeholder="SENHA">
             <img id="olinho" onclick="mostrarsenha()" src="assets/eye.svg">
             <br>
-            <input type="submit"name="cadastrar" value="CADASTRAR">
+            <input type="submit"name="cadastrar" id="cadastrar" value="CADASTRAR">
         </form>
     </div>
 </body>
