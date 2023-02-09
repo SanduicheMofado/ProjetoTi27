@@ -1,14 +1,17 @@
 <?php
+//Captura variáveis usando metodo POST
 if($_SERVER['REQUEST_METHOD']=='POST'){
     $nome=$_POST['nome'];
     $password=$_POST['password'];
-    include("conectadb.php");
+    include("conectadb.php");//Include que chama conexão com banco de dados
     //Consulta SQL para verificar o usuário cadastrado
-    $sql="SELECT COUNT(usu_id) FROM usuarios WHERE usu_nome='$nome' AND usu_senha='$password'";
+    $sql="SELECT COUNT(usu_id) FROM usuarios WHERE usu_nome='$nome' AND usu_senha='$password' AND usu_ativo='s'";
+    //coleta o valor da consulta e cria um array pra armazenar
     $resultado=mysqli_query($link,$sql);
     while($tbl=mysqli_fetch_array($resultado)){
-        $cont=$tbl[0];
+        $cont=$tbl[0];//Armazena valor da coluna
     }
+    //verifica senha
     if($cont==1){
         header("location: homesistema.html");
     }

@@ -14,7 +14,7 @@ if($cont==1){
     echo"<script>window.alert('USUARIO JÁ CADASTRADO!');</script>";
 }
 else{
-    $sql="INSERT INTO usuarios(usu_nome,usu_senha)VALUES('$nome','$senha')";
+    $sql="INSERT INTO usuarios(usu_nome,usu_senha,usu_ativo)VALUES('$nome','$senha','n')";
     mysqli_query($link,$sql);
     header("location:listausuarios.php");
 
