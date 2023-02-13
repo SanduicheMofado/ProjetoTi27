@@ -45,9 +45,9 @@ else{
         </script>
         <form action="cadastrausuario.php" method="POST">
             <h1>CADASTRO DE USUÁRIOS</h1>
-            <input type="text"name="nome" id="nome"placeholder="NOME">
+            <input type="text"name="nome" id="nome"placeholder="NOME" required>
             <br>
-            <input type="password" id="senha" name="senha" placeholder="SENHA">
+            <input type="password" id="senha" name="senha" placeholder="SENHA" required>
             <img id="olinho" onclick="mostrarsenha()" src="assets/eye.svg">
             <br>
             <input type="submit"name="cadastrar" id="cadastrar" value="CADASTRAR">
