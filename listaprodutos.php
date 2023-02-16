@@ -20,6 +20,8 @@ $resultado = mysqli_query($link, $sql)
                 <th>DESC</th>
                 <th>QUANT</th>
                 <th>PRECO</th>
+                <th>ATIVO</th>
+                <th>ALTERAR DADOS</th>
             </tr>
             <?php
             while($tbl = mysqli_fetch_array($resultado)){
@@ -29,6 +31,8 @@ $resultado = mysqli_query($link, $sql)
                 <td><?=$tbl[2]?></td>
                 <td><?=$tbl[3]?></td>
                 <td><?=$tbl[4]?></td>
+                <td><?=$check=($tbl[5]=='s')?"SIM":"NÂO"?></td>
+                <td><a href="alterarproduto.php?id=<?=$tbl[0]?>"><input type="button" value="ALTERAR"></a></td>
             </tr>
             <?php
             }

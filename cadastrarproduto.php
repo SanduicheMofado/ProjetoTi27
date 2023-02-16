@@ -17,7 +17,7 @@ if($cont==1){
     echo"<script>window.alert('PRODUTO JÁ CADASTRADO!');</script>";
 }
 else{
-    $sql="INSERT INTO produtos(pro_nome,pro_desc,pro_quant,pro_preco)VALUES('$pro_nome','$pro_desc','$pro_quant','$pro_preco')";
+    $sql="INSERT INTO produtos(pro_nome,pro_desc,pro_quant,pro_preco,pro_ativo)VALUES('$pro_nome','$pro_desc','$pro_quant','$pro_preco','s')";
     mysqli_query($link,$sql);
     header("location:listaprodutos.php");
 }}
@@ -32,19 +32,19 @@ else{
     <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
-    <div><table border="1">
+    <div>
         <a href="homesistema.html"><input type="button" id="menuhome" value="HOME SISTEMA"></a>
         <form action="cadastrarproduto.php" method="POST">
             <h1>CADASTRO DE PRODUTOS</h1>
             <hr>
             <input type="text"name="pro_nome" id="pro_nome"placeholder="NOME" required>
-            <br>
+            <p></p>
             <input type="text" id="pro_desc" name="pro_desc" placeholder="DESCRIÇÃO" required>
-            <br>
+            <p></p>
             <input type="text" id="pro_preco" name="pro_preco" placeholder="PREÇO" required>
-            <br>
+            <p></p>
             <input type="text" id="pro_quant" name="pro_quant" placeholder="QUANTIDADE" required>
-            <br>
+            <p></p>
             <input type="submit"name="cadastrar" id="cadastrar" value="CADASTRAR">
         </form>
     </table></div>
