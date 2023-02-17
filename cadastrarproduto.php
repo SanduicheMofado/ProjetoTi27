@@ -45,6 +45,10 @@ else{
             <p></p>
             <input type="text" id="pro_quant" name="pro_quant" placeholder="QUANTIDADE" required>
             <p></p>
+            <label>IMAGEM I</label>
+            <input type="file" name="file1" id="img1" onchange="foot1()">
+            <img src="img/semimg.gif" width="50px" id="foto1a">
+
             <input type="submit"name="cadastrar" id="cadastrar" value="CADASTRAR">
         </form>
     </table></div>
