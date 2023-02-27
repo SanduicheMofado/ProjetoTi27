@@ -1,18 +1,22 @@
 <?php
 include("conectadb.php");
+
+//Coleta de Variáveis dos campos de texto HTML
 if($_SERVER['REQUEST_METHOD']=='POST'){
 $id=$_POST['id'];
 $nome=$_POST['nome'];
 $senha=$_POST['senha'];
 $ativo = $_POST['ativo'];
 
+//Instrução SQL para atualização de usuario e senha
 $sql="UPDATE usuarios SET usu_senha='$senha',usu_nome='$nome', usu_ativo = '$ativo' WHERE usu_id='$id'";
 mysqli_query($link,$sql);
 header('location:listausuarios.php');
 echo"<script>window.alert('USUÁRIO ALTERADO COM SUCESSO');</script>";
 exit();
 }
-//Capturar id via GET
+
+//Coletando ID via URL exemplo alterausuario.php?id=2
 $id=$_GET['id'];
 $sql="SELECT * FROM usuarios WHERE usu_id='$id'";
 $resultado=mysqli_query($link,$sql);
@@ -32,13 +36,14 @@ while($tbl=mysqli_fetch_array($resultado)){
     <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
+<a href="homesistema.html"><input type="button" id="menuhome" value="HOME SISTEMA"></a>
     <div>
         <form action="alterarusuario.php" method="post">
-        <input type="hidden" value="<?=$id?>" name="id" required>    
+        <input type="hidden" value="<?=$id?>" name="id" required><!-- coleta id ao carrega a página de forma oculta-->
         <label>NOME</label>
-        <input type="text" name="nome" id="nome" value="<?=$nome?>"required>
+        <input type="text" name="nome" id="nome" value="<?=$nome?>"required><!-- Coleta o nome do usuario e preenche a txtbox-->
         <label>SENHA</label>
-        <input type="password" name="senha" id="senha" value="<?=$senha?>"required>
+        <input type="password" name="senha" id="senha" value="<?=$senha?>"required><!-- Coleta a senha do usuario e preenche a txtbox-->
         <br>
         <label>Status: <?=$check = ($ativo == 's')?"ATIVO":"INATIVO";?></label>
         <br></br>

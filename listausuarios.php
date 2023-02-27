@@ -1,5 +1,7 @@
 <?php
 include("conectadb.php");
+
+// passa a instrução para o banco de dados para listar todo conteudo da tabela usuarios
 $sql = "SELECT * FROM usuarios WHERE usu_ativo='s'";
 $resultado = mysqli_query($link, $sql);
 $ativo = "s";
@@ -43,12 +45,14 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                 <th>ATIVO</th>
             </tr>
             <?php
+            //preenchendo a tabela com os dados do banco
             while($tbl = mysqli_fetch_array($resultado)){
                 ?>
                 <tr>
                 <td><?=$tbl[1]?></td>
                 <td><a href="alterarusuario.php?id=<?=$tbl[0]?>"><input type="button" value="ALTERAR"></a></td>
-                <!-- <td><a href="excluirusuario.php?id=<//?=$tbl[0]?>"><input type="button" value="EXCLUIR"></a></td> -->
+                
+                <!-- valida $ativo se 's' escreve SIM se 'n' NÃO -->
                 <td><?=$check=($tbl[3]=='s')?"SIM":"NÂO"?></td>
                 </tr>
                 <?php

@@ -10,6 +10,7 @@ $resultado=mysqli_query($link,$sql);
 while($tbl=mysqli_fetch_array($resultado)){
     $cont=$tbl[0];
 }
+//verificação visual se o usuario existe ou não
 if($cont==1){
     echo"<script>window.alert('USUARIO JÁ CADASTRADO!');</script>";
 }
@@ -35,6 +36,7 @@ else{
     <a href="homesistema.html"><input type="button" id="menuhome" value="HOME SISTEMA"></a>
     <div>
     <script> 
+        //script para mostrar senha
             function mostrarsenha(){
                 var tipo=document.getElementByID("senha");
                 if(tipo=="password"){
