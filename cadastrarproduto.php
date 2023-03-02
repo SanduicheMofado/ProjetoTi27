@@ -6,12 +6,15 @@ if($_SERVER["REQUEST_METHOD"] =="POST")
 $pro_desc=$_POST['pro_desc'];
 $pro_quant=$_POST['pro_quant'];
 $pro_preco=$_POST['pro_preco'];
+$foto1=$_POST['foto1'];
+
+if ($foto1=="")$img="semimg.png";
 
 //abre conexão com o banco de dados
 include("conectadb.php");
 
 //Verifica se o produto já existe
-$sql="SELECT COUNT(pro_id) FROM produtos WHERE pro_nome ='$pro_nome' AND pro_desc='$pro_desc' AND pro_quant='$pro_quant' AND pro_preco='$pro_preco'";
+$sql="SELECT COUNT(pro_id) FROM produtos WHERE pro_nome ='$pro_nome'";
 $resultado=mysqli_query($link,$sql);
 while($tbl=mysqli_fetch_array($resultado)){
     $cont=$tbl[0];
@@ -21,7 +24,7 @@ if($cont==1){
 }
 //caso o produto não exista os dados vão ser inseridos na tabela 'produtos'
 else{
-    $sql="INSERT INTO produtos(pro_nome,pro_desc,pro_quant,pro_preco,pro_ativo)VALUES('$pro_nome','$pro_desc','$pro_quant','$pro_preco','s')";
+    $sql="INSERT INTO produtos(pro_nome,pro_desc,pro_quant,pro_preco,pro_ativo,imagem1)VALUES('$pro_nome','$pro_desc','$pro_quant','$pro_preco','s','$foto1')";
     mysqli_query($link,$sql);
     header("location:listaprodutos.php");
 }}
@@ -53,11 +56,15 @@ else{
             <p></p>
 
             <label>IMAGEM I</label>
-            <input type="file" name="file1" id="img1" onchange="foot1()">
-            <img src="img/semimg.gif" width="50px" id="foto1a">
-
+            <input type="file" name="foto1" id="img1" onchange="foot1()">
+            <img src="img/semimg.png" width="50px" id="foto1a">
             <input type="submit"name="cadastrar" id="cadastrar" value="CADASTRAR">
         </form>
+        <script>
+            function foto1(){
+                document.getElementById("foto1a").src="img/"()
+            };
+        </script>
     </table></div>
 </body>
 </html>
