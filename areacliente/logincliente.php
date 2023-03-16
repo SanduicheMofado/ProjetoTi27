@@ -5,7 +5,7 @@
 if($_SERVER['REQUEST_METHOD']=="POST"){
     $cpf = $_POST['cpf']; #captura varíavel que está no name="nome" html
     $password = $_POST['password']; #captura variável que está no name="password" html
-    include("conectadb.php"); #include chama a conexão com o banco de dados no script conectadb.php
+    include("../conectadb.php"); #include chama a conexão com o banco de dados no script conectadb.php
 
     #CONSULTA SQL PARA VERIFICAR USUARIO CADASTRADO
     #instrução de comunicação com o banco de dados
@@ -31,7 +31,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

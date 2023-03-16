@@ -32,20 +32,21 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     <br>
     <!-- filtra produtos baseado em status, se $pro_ativo='s' lista somente produtos ativos,
         se $pro_ativo='n' lista somente produtos inativos.-->
-    <form action="listaprodutos.php" method="post">
+    <form action="listaprodutos.php" method="post" class="lista">
         <input type="radio" name="ativo" value="s" required onclick="submit()" <?=$ativo=='s'?"checked":""?>>ATIVOS<br>
         <input type="radio" name="ativo" value="n" required onclick="submit()" <?=$ativo=='n'?"checked":""?>>INATIVOS
 
     </form>
     <div><table border="1">
         <tr>
-                <th>ID</th>
-                <th>NOME</th>
-                <th>DESC</th>
-                <th>QUANT</th>
-                <th>PRECO</th>
-                <th>ATIVO</th>
-                <th>ALTERAR DADOS</th>
+                    <th>ID</th>
+                    <th>NOME</th>
+                    <th>DESCRIÇÃO</th>
+                    <th>QUANTIDADE</th>
+                    <th>PRECO</th>
+                    <th>IMAGEM</th>
+                    <th>ALTERAR</th>
+                    <th>ATIVO</th>
             </tr>
             <?php
             //preenchendo a tabela com os dados do banco
@@ -59,6 +60,8 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 
                 <!-- number format traz o formato com 2 casas após a virgula e troca . por , na apresentacao -->
                 <td>R$ <?= number_format($tbl[4],2,',', '.')?></td>
+
+                <td><img src="data:image/jpeg;base64,<?=$tbl[6]?>" width="100" height="100"></td>
 
                 <!-- valida $pro_ativo se 's' escreve SIM se 'n' NÃO -->
                 <td><?=$check=($tbl[5]=='s')?"SIM":"NÂO"?></td>
