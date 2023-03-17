@@ -6,12 +6,16 @@ if($_SERVER["REQUEST_METHOD"] =="POST")
 $pro_desc=$_POST['pro_desc'];
 $pro_quant=$_POST['pro_quant'];
 $pro_preco=$_POST['pro_preco'];
-$foto1=$_POST['foto1'];
-
-if ($foto1=="")$img="semimg.png";
 
 //abre conexão com o banco de dados
 include("conectadb.php");
+
+//Criptografa foto para o banco de dados
+if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
+    $imagem_temp = $_FILES['imagem']['tmp_name'];
+    $imagem = file_get_contents($imagem_temp);
+    $imagem_base64 = base64_encode($imagem);
+};
 
 //Verifica se o produto já existe
 $sql="SELECT COUNT(pro_id) FROM produtos WHERE pro_nome ='$pro_nome'";
@@ -24,7 +28,7 @@ if($cont==1){
 }
 //caso o produto não exista os dados vão ser inseridos na tabela 'produtos'
 else{
-    $sql="INSERT INTO produtos(pro_nome,pro_desc,pro_quant,pro_preco,pro_ativo,imagem1)VALUES('$pro_nome','$pro_desc','$pro_quant','$pro_preco','s','$foto1')";
+    $sql="INSERT INTO produtos(pro_nome,pro_desc,pro_quant,pro_preco,pro_ativo,imagem1)VALUES('$pro_nome','$pro_desc','$pro_quant','$pro_preco','s','$imagem_base64')";
     mysqli_query($link,$sql);
     header("location:listaprodutos.php");
 }}
@@ -43,7 +47,7 @@ else{
     <div>
         <a href="homesistema.html"><input type="button" id="menuhome" value="HOME SISTEMA"></a>
         <!--  -->
-        <form action="cadastrarproduto.php" method="POST">
+        <form action="cadastrarproduto.php" method="POST" enctype="multipart/form-data">
             <h1>CADASTRO DE PRODUTOS</h1>
             <hr>
             <input type="text"name="pro_nome" id="pro_nome"placeholder="NOME" required>
@@ -56,13 +60,13 @@ else{
             <p></p>
 
             <label>IMAGEM I</label>
-            <input type="file" name="foto1" id="img1" onchange="foot1()">
-            <img src="img/semimg.png" width="50px" id="foto1a">
+            <input type="file" name="imagem" id="imagem">
             <input type="submit"name="cadastrar" id="cadastrar" value="CADASTRAR">
+            
         </form>
         <script>
             function foto1(){
-                document.getElementById("foto1a").src="img/"()
+                document.getElementById("foto1a").src = "img/"(document.getElementById("img1").value).slice(12);
             };
         </script>
     </table></div>

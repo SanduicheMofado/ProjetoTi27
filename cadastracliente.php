@@ -24,9 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         echo"<script>window.alert('USUARIO JÁ CADASTRADO!');</script>";
     }
     else{
-        $sql = "INSERT INTO clientes (cli_nome, cli_cpf, cli_senha, cli_datanasc, cli_telefone, cli_logradouro, cli_numero, cli_cidade, cli_ativo) VALUES('$nome','$cpf', '$senha', STR_TO_DATE('$datanasc_formatada','%Y-%m-%d'), '$telefone', '$logradouro','$numero','$cidade', 's')";
+        $sql = "INSERT INTO clientes (cli_nome, cli_cpf, cli_senha, cli_datanasc, cli_telefone, cli_logradouro, cli_numero, cli_cidade, cli_ativo) VALUES('$nome','$cpf', '$senha', STR_TO_DATE('$datanasc','%Y-%m-%d'), '$telefone', '$logradouro','$numero','$cidade', 's')";
         mysqli_query($link,$sql);
-        echo($datanasc);
         header("Location: listacliente.php");
     }
 }
@@ -56,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <br></br>
             <label>DATA DE NASCIMENTO</label>
             <input type="date" name="datanasc">
-            <br></br>
+            <br></br><br>
             <label>TELEFONE</label>
             <input type="number" name="telefone">
             <br></br>

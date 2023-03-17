@@ -1,6 +1,7 @@
 <?php
-//
-#
+//Variaveis de sessão
+session_start();
+
 #CAPTURA VARIÁVEIS UTILIZANDO O MÉTODO POST
 if($_SERVER['REQUEST_METHOD']=="POST"){
     $cpf = $_POST['cpf']; #captura varíavel que está no name="nome" html
@@ -19,6 +20,12 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
     #Verifica se o resultado do cont é 0 ou 1
     #Se 0 o Usuario ou Senha estão incorretos
     if($cont==1){
+        $sql="SELECT * FROM clientes WHERE cli_cpf='$cpf' AND cli_senha='$password' AND cli_ativo='s'";
+        $resultado=mysqli_query($link,$sql);
+        while ($tbl=mysqli_fetch_array($resultado));
+        $_SESSION['idcliente']=$tbl[0];
+        $_SESSION['nomecliente']=$tbl[2];
+
         header("Location: loja.php"); #Se usuario e senha corretos, vá para homesistema
     }
     else{
@@ -37,7 +44,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LOGIN USUARIOS</title>
-    <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="../estilo.css">
 </head>
 <body>
     <div class="container">
@@ -57,7 +64,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
     <!-- FIM DO SCRIPT PARA MOSTRA SENHA -->
 
         <form action="logincliente.php" method="POST">
-            <h1>LOGIN DE USUARIO</h1>
+            <h1>LOGIN DE CLIENTE</h1>
             <input type="text" name="cpf" id="nome" placeholder="CPF">
             <p></p>
             <input type="password" id="senha" name="password" placeholder="Senha">

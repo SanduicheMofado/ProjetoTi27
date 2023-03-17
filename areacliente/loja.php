@@ -1,6 +1,7 @@
 <?php
 #Traz arquivo de conexão do banco
 include("../conectadb.php");
+session_start();
 #Carrega a Página trazendo produtos com s (Produtos ATIVOS)
 $sql = "SELECT * FROM produtos WHERE pro_ativo = 's'";
 $resultado = mysqli_query($link, $sql);
@@ -18,10 +19,12 @@ $ativo = "s";
     <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
+    <!-- coleta nome de usuario da variavel de sessao -->
+    <h1 style="background-color: whitesmoke;">BOM DIA <?php $_SESSION['nomecliente'];?></h1>
     <a href="logincliente.php"><input type="button" value="LOGIN"></a>
     <a href="clientecadastra.php"><input type="button" value="CADASTRAR"></a>
-    <form action="loja.php" method="post">
 
+    <form action="loja.php" method="post">
     <div class="container">
         <table border="1">
             <tr>
