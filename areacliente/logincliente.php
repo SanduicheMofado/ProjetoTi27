@@ -13,7 +13,6 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
     $sql = "SELECT COUNT(cli_id) FROM clientes WHERE cli_cpf = '$cpf' AND cli_senha ='$password' AND cli_ativo = 's'";
     #coleta o valor da consulta e cria um array para armazenar
     $resultado = mysqli_query($link,$sql);
-    echo($sql);
     while($tbl = mysqli_fetch_array($resultado)){
         $cont = $tbl[0]; #armazena o valor da coluna no caso a [0]
     }
@@ -22,10 +21,10 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
     if($cont==1){
         $sql="SELECT * FROM clientes WHERE cli_cpf='$cpf' AND cli_senha='$password' AND cli_ativo='s'";
         $resultado=mysqli_query($link,$sql);
-        while ($tbl=mysqli_fetch_array($resultado));
+        while ($tbl=mysqli_fetch_array($resultado)){
         $_SESSION['idcliente']=$tbl[0];
         $_SESSION['nomecliente']=$tbl[2];
-
+        }
         header("Location: loja.php"); #Se usuario e senha corretos, vá para homesistema
     }
     else{
