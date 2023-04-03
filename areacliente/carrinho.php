@@ -12,19 +12,20 @@ WHERE cli_id=$idcliente AND carrinho_finalizado='n'";
 //captura resultados de pesquisa sql
 $resultado =mysqli_query($link,$sql);
 //seletor de carrinho finalizado ou não
-if($_SERVER['REQUEST METHOD']=='POST'){
+if($_SERVER['REQUEST_METHOD']=='POST'){
+    //recebe escolha do html seletor(radio button)
     $finalizada=$_POST['finalizada'];
     if($finalizada=='n'){
         $sql="SELECT numero_carrinho,pro_nome,pro_desc,pro_preco,item_quantidade,valor_carrinho,imagem1,carrinho_id
         FROM itens_carrinho INNER JOIN clientes ON fk_cli_id=cli_id INNER JOIN produtos ON fk_pro_id=pro_id
         WHERE cli_id=$idcliente AND carrinho_finalizado='n'";
-        mysqli_query($link,$sql);
+        $resultado=mysqli_query($link,$sql);
     }
     else{
         $sql="SELECT numero_carrinho,pro_nome,pro_desc,pro_preco,item_quantidade,valor_carrinho,imagem1,carrinho_id
         FROM itens_carrinho INNER JOIN clientes ON fk_cli_id=cli_id INNER JOIN produtos ON fk_pro_id=pro_id
         WHERE cli_id=$idcliente AND carrinho_finalizado='s'";
-        mysqli_query($link,$sql);
+        $resultado=mysqli_query($link,$sql);
     }
 }
 ?>
@@ -35,13 +36,14 @@ if($_SERVER['REQUEST METHOD']=='POST'){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="../estilo.css">
 </head>
 <body>
-    <form action="carrinho.php" method="post">
-    <a href="loja.php"><input type="button" id="loja" value="VOLTAR PARA LOJA"></a>
-    <input type="radio" name="finalizada" value="s" required onclick="submit()"<?=$finalizada=='s'?"checked":"" ?>COMPRAS FINALIZADAS>
-    <input type="radio" name="finalizada" value="n" required onclick="submit()"<?=$finalizada=='s'?"checked":"" ?>CARRINHOS ABERTOS>
+    <a href="loja.php"><input type="button" id="loja" value="VOLTAR PARA A LOJA"></a>
+    <form action = "carrinho.php" method="post">
+        <input type="radio" name="finalizada" value='s' onclick="submit()" <?= $finalizada == 's'? "checked" : "" ?>>COMPRAS FINALIZADAS
+        <br>
+        <input type="radio" name="finalizada" value='n' onclick="submit()" <?= $finalizada == 'n'? "checked" : "" ?>>CARRINHOS ABERTOS
     </form>
     <div class="container">
         <td><a href="finalizavenda.php?id=<?=$tbl[0]?>"><input type="button" value="FINALIZAR VENDA"></a></td>
@@ -61,8 +63,8 @@ if($_SERVER['REQUEST METHOD']=='POST'){
                     <td><?=$tbl[0]?></td>
                     <td><?=$tbl[1]?></td>
                     <td><?=$tbl[2]?></td>
-                    <td><?=$tbl[3]?></td>
                     <td>R$<?=number_format($tbl[4],2,',', '.')?></td>
+                    <td><?=$tbl[3]?></td>
                     <td><img src="data:image/jpeg;base64,<?=$tbl[6]?>" width="100" height="100"></td>
                     <td><a href="excluirproduto.php?id=<?=$tbl[7]?>"><input type="button" value="REMOVER ITEM"></a></td>
                 </tr>

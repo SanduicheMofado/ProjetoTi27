@@ -23,8 +23,8 @@ $ativo = "s";
     if(isset($_SESSION['idcliente'])){
     ?>
     <!-- coleta nome de usuário e variável de sessão -->
-    <h1 style="background-color: whitesmoke;">BOM DIA <?= $_SESSION['nomecliente']?></h1>
     <form id="formloja" action="logout.php" method="post">
+        <h1 style="background-color: whitesmoke;">BOM DIA <?= $_SESSION['nomecliente']?></h1>
         <a href="carrinho.php"><input type="button" value="AREA CLIENTE" <?=$_SESSION['idcliente']?>></a>
         <input type="submit" value="LOGOUT">
     </form>

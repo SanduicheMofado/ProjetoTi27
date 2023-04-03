@@ -29,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($cont == 0) {
                 $sql = "INSERT INTO itens_carrinho (fk_pro_id, item_quantidade, fk_cli_id, valor_carrinho, numero_carrinho, carrinho_finalizado) 
                 VALUES('$idproduto','$quantidade', '$idcliente','$totalparcial', '$numerocarrinho', 'n')";
+                mysqli_query($link, $sql);
                 
                 echo "<script>window.alert('PRODUTO ADICIONADO AO CARRINHO $numerocarrinho');</script>";
                 echo "<script>window.location.href='loja.php';</script>";
